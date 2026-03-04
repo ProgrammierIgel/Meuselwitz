@@ -4,12 +4,14 @@
 
 
 \setbeamertemplate{navigation symbols}{}
+\institute{Veit-Ludwig von Seckendorffgymnasium Meuselwitz}
 
 \definecolor{background}{HTML}{10335F} % blau
 \definecolor{primary}{HTML}{f2df07} % gelb
-\definecolor{text}{HTML}{ffffff} % weiß
+%\definecolor{secondary}{model-list}{spec-list}
+\definecolor{textcolor}{HTML}{ffffff} % weiß
 
-\setbeamercolor{normal text}{fg=text}
+\setbeamercolor{normal text}{fg=textcolor}
 \setbeamercolor{author}{fg=primary}
 \setbeamercolor{title}{fg=primary}
 \setbeamercolor{frametitle}{fg=primary}
@@ -35,10 +37,12 @@
     \useasboundingbox (0,0) rectangle (\paperwidth,\paperheight);
     \fill[background] (0,0) rectangle( \paperwidth, \paperheight);
     % Dezenter Streifen links
-    \fill[primary,opacity=0.1]
-      (0,0) rectangle (0.032\paperwidth,\paperheight);
+    %\fill[primary,opacity=0.1] (0,0) rectangle (0.032\paperwidth,\paperheight-0.03);
+    % Dezenter Streifen unten
+    \fill[primary,opacity=0.8]
+      (0,0) rectangle (\paperwidth,0.05\paperheight);
     % Logo rechts unten (sehr transparent)
-    \node[opacity=0.08, anchor=base]
+    \node[opacity=0.2, anchor=base]
         at (0.825\paperwidth, 0.1\paperheight){%
       \includegraphics[width=0.28\paperwidth]{logo.png}%  <- echtes Logo
     };
@@ -47,35 +51,31 @@
 
 
 
-\definecolor{secondary}{HTML}{ffffff}  % Mittelblau
-\definecolor{accent}{HTML}{00ffff}     % Gold / Orange
-\definecolor{lightgray}{HTML}{ff00ff}  % Hellgrau
-\definecolor{textdark}{HTML}{0000ff}
+% \definecolor{secondary}{HTML}{ffffff}  % Mittelblau
+% \definecolor{accent}{HTML}{00ffff}     % Gold / Orange
+% \definecolor{lightgray}{HTML}{ff00ff}  % Hellgrau
+% \definecolor{textdark}{HTML}{0000ff}
+\definecolor{test}{HTML}{ff0000}
 % --- Titelseite ----------------------------------------------
-% \setbeamertemplate{title page}{%
-%   \begin{tikzpicture}[remember picture,overlay]
-    % \fill[background]
-    %   (current page.south west) rectangle (current page.north east);
-    % \fill[secondary]
-    %   (current page.south west) rectangle
-    %   ([yshift=0.012\paperheight]current page.south east);
-    % \fill[accent]
-    %   ([yshift=0.012\paperheight]current page.south west) rectangle
-    %   ([yshift=0.019\paperheight]current page.south east);
+\setbeamertemplate{title page}{%
+   \begin{tikzpicture}[remember picture,overlay]
+    \fill[background]
+      (current page.south west) rectangle (current page.north east);
+    \fill[primary]
+      (current page.south west) rectangle
+      ([yshift=0.025\paperheight]current page.south east);
+
+
     % Grosses Logo im Hintergrund rechts (opacity sehr niedrig)
-    % \node[opacity=0.09,anchor=center]
-    %   at ([xshift=0.30\paperwidth]current page.center){%
-    %   \includegraphics[width=0.55\paperwidth]{mein_logo.png}  %<- echtes Logo
-      % \tikz{                                                 % <- Platzhalter
-      %   \fill[white]             (0,0) circle (3.2cm);
-      %   \fill[secondary!60!white](0,0) circle (2.4cm);
-      %   \node[font=\sffamily\bfseries\Huge,text=white]at(0,0){LOGO};
-      % }%
-    %};
-    % \fill[secondary!80!black]
-    %   (current page.south west) rectangle
-    %   ([xshift=0.012\paperwidth]current page.north west);
-    % Textblock
+    \node[opacity=0.3,anchor=center]
+      at ([xshift=0.24\paperwidth, yshift=-0.1]current page.center){%
+      \includegraphics[width=0.5\paperwidth]{logo.png}  %<- echtes Logo
+
+    };
+    \fill[primary, opacity=0.4]
+      (current page.south west) rectangle
+      ([xshift=0.05\paperwidth]current page.north west);
+    Textblock
     % \node[anchor=west,text width=0.75\paperwidth]
     %   at ([xshift=0.06\paperwidth,yshift=0.08\paperheight]
     %       current page.west){%
@@ -89,5 +89,5 @@
       %   \\[0.25em]
       % \usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate%
     % };
-%   \end{tikzpicture}%
-% }
+  \end{tikzpicture}%
+}
