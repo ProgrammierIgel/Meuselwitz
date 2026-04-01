@@ -2,7 +2,6 @@
 \RequirePackage{tikz}
 \RequirePackage{xcolor}
 
-
 \setbeamertemplate{navigation symbols}{}
 \institute{Veit-Ludwig von Seckendorffgymnasium Meuselwitz}
 
@@ -16,9 +15,7 @@
 \setbeamercolor{title}{fg=primary}
 \setbeamercolor{frametitle}{fg=primary}
 \setbeamercolor{framesubtitle}{fg=primary}
-
-
-
+\setbeamercolor{block alertblock exampleblock}{fg=primary}
 
 \setbeamerfont{title}{size=\LARGE, series=\bfseries}
 \setbeamerfont{subtitle}{size=\large, series=\normalfont}
@@ -27,7 +24,7 @@
 \setbeamerfont{framesubtitle}{size=\small}
 \setbeamerfont{block title}{size=\normalsize, series=\bfseries}
 \setbeamerfont{footline}{size=\tiny}
-
+\setbeamercolor{footline2}{bg=primary!85!black, fg=background}
 
 % ================================================================
 %  HINTERGRUND MIT LOGO-WASSERZEICHEN
@@ -39,55 +36,83 @@
     % Dezenter Streifen links
     %\fill[primary,opacity=0.1] (0,0) rectangle (0.032\paperwidth,\paperheight-0.03);
     % Dezenter Streifen unten
-    \fill[primary,opacity=0.8]
-      (0,0) rectangle (\paperwidth,0.05\paperheight);
+    % \fill[primary!80!black,opacity=0.8]
+    % (0,0) rectangle (\paperwidth,0.05\paperheight);
     % Logo rechts unten (sehr transparent)
     \node[opacity=0.2, anchor=base]
-        at (0.825\paperwidth, 0.1\paperheight){%
+    at (0.825\paperwidth, 0.1\paperheight){%
       \includegraphics[width=0.28\paperwidth]{logo.png}%  <- echtes Logo
     };
   \end{tikzpicture}%
 }
 
-
-
 % \definecolor{secondary}{HTML}{ffffff}  % Mittelblau
-% \definecolor{accent}{HTML}{00ffff}     % Gold / Orange
+% \definecolor{accent}{HTML}{fffff}     % Gold / Orange
 % \definecolor{lightgray}{HTML}{ff00ff}  % Hellgrau
 % \definecolor{textdark}{HTML}{0000ff}
 \definecolor{test}{HTML}{ff0000}
 % --- Titelseite ----------------------------------------------
 \setbeamertemplate{title page}{%
-   \begin{tikzpicture}[remember picture,overlay]
+  \begin{tikzpicture}[remember picture,overlay]
     \fill[background]
-      (current page.south west) rectangle (current page.north east);
-    \fill[primary]
-      (current page.south west) rectangle
-      ([yshift=0.025\paperheight]current page.south east);
-
+    (current page.south west) rectangle (current page.north east);
+    \fill[primary, opacity=0.7]
+    (current page.south west) rectangle
+    ([yshift=0.024\paperheight]current page.south east);
+    \fill[primary, opacity=0.7]
+    (current page.north west) rectangle
+    ([yshift=-0.020\paperheight]current page.north east);
 
     % Grosses Logo im Hintergrund rechts (opacity sehr niedrig)
-    \node[opacity=0.3,anchor=center]
-      at ([xshift=0.24\paperwidth, yshift=-0.1]current page.center){%
-      \includegraphics[width=0.5\paperwidth]{logo.png}  %<- echtes Logo
-
+    \node[opacity=0.7,anchor=center]
+    at ([xshift=0.28\paperwidth, yshift=-0.1]current page.center){%
+      \includegraphics[width=0.4\paperwidth]{logo.png}  %<- echtes Logo
     };
-    \fill[primary, opacity=0.4]
-      (current page.south west) rectangle
-      ([xshift=0.05\paperwidth]current page.north west);
-    Textblock
-    % \node[anchor=west,text width=0.75\paperwidth]
-    %   at ([xshift=0.06\paperwidth,yshift=0.08\paperheight]
-    %       current page.west){%
-      % \usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\\[0.4em]
-      % \usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle
-      %   \\[1.0em]
-      % \tikz{\draw[accent,line width=1.5pt](0,0)--(0.35\paperwidth,0);}
-      %   \\[0.8em]
-      % \usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor\\[0.25em]
-      % \usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute
-      %   \\[0.25em]
-      % \usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate%
-    % };
+    % \fill[primary, opacity=0.4]
+    %   (current page.south west) rectangle
+    %   ([xshift=0.05\paperwidth]current page.north west);
+    \node[anchor=west,text width=0.52\paperwidth]
+    at ([xshift=0.06\paperwidth,yshift=0.08\paperheight]
+    current page.west){%
+      \usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\\[0.4em]
+      \usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle
+      \\[1.0em]
+      \tikz{\draw[primary,line width=2pt](0,0)--(0.4\paperwidth,0);}
+      \\[0.8em]
+      \usebeamerfont{author}\usebeamercolor[textcolor]{author}\insertauthor\\[0.25em]
+      \usebeamerfont{institute}\usebeamercolor[textcolor]{institute}\insertinstitute
+      \\[0.25em]
+      \usebeamerfont{date}\usebeamercolor[textcolor]{date}\insertdate%
+    };
   \end{tikzpicture}%
 }
+
+% --- Fusszeile -----------------------------------------------
+\setbeamertemplate{footline}{%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=0.3cm,dp=0.1cm]{footline}
+    \begin{tikzpicture}[overlay]
+      \draw[primary,line width=1.2pt](0,0.05cm)--(\paperwidth,0.05cm);
+    \end{tikzpicture}%
+
+    \usebeamerfont{footline}%
+    \hspace{0.4cm}%
+    \insertshortauthor
+    \hfill
+    \insertshorttitle
+    \hfill
+    \insertshortdate
+    \hspace{0.4cm}
+  \end{beamercolorbox}%
+
+  \begin{beamercolorbox}[wd=\paperwidth,ht=0.25cm,dp=0.12cm]{footline2}
+    \usebeamerfont{footline}%
+    \hspace{0.4cm}
+    \hfill
+    \insertshortinstitute
+    \hfill
+    \hspace{0.4cm}
+
+  \end{beamercolorbox}%
+}
+
+% \setbeamertemplate{blocks}[rounded][shadow=false, ]
