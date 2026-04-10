@@ -1,6 +1,8 @@
 \ProvidesPackage{beamerthemeMeuselwitz}
 \RequirePackage{tikz}
+\RequirePackage[most]{tcolorbox}
 \RequirePackage{xcolor}
+\RequirePackage[normalem]{ulem}
 
 \setbeamertemplate{navigation symbols}{}
 \institute{Veit-Ludwig von Seckendorffgymnasium Meuselwitz}
@@ -24,7 +26,23 @@
 \setbeamerfont{framesubtitle}{size=\small}
 \setbeamerfont{block title}{size=\normalsize, series=\bfseries}
 \setbeamerfont{footline}{size=\tiny}
+\setbeamerfont{headline}{size=\tiny}
+\setbeamercolor{headlinecolors}{bg=primary!85!black, fg=white}
 \setbeamercolor{footline2}{bg=primary!85!black, fg=background}
+\setbeamercolor{section in head/foot}{fg=background}
+\setbeamerfont{alerted text}{series=\bfseries}
+
+% \setbeamercolor{navigation symbols}{fg=white}
+\newcommand{\gap}[1]{\underline{\textbf{#1}}}
+
+
+% Gliederung
+
+\setbeamercolor{section in toc}{fg=primary}
+\setbeamercolor{subsection in toc}{fg=primary}
+\setbeamercolor{subsubsection in toc}{fg=primary}
+
+
 
 % ================================================================
 %  HINTERGRUND MIT LOGO-WASSERZEICHEN
@@ -46,10 +64,7 @@
   \end{tikzpicture}%
 }
 
-% \definecolor{secondary}{HTML}{ffffff}  % Mittelblau
-% \definecolor{accent}{HTML}{fffff}     % Gold / Orange
-% \definecolor{lightgray}{HTML}{ff00ff}  % Hellgrau
-% \definecolor{textdark}{HTML}{0000ff}
+
 \definecolor{test}{HTML}{ff0000}
 % --- Titelseite ----------------------------------------------
 \setbeamertemplate{title page}{%
@@ -68,9 +83,9 @@
     at ([xshift=0.28\paperwidth, yshift=-0.1]current page.center){%
       \includegraphics[width=0.4\paperwidth]{logo.png}  %<- echtes Logo
     };
-    % \fill[primary, opacity=0.4]
-    %   (current page.south west) rectangle
-    %   ([xshift=0.05\paperwidth]current page.north west);
+    \fill[primary, opacity=0.4]
+      (current page.south west) rectangle
+      ([xshift=0.05\paperwidth]current page.north west);
     \node[anchor=west,text width=0.52\paperwidth]
     at ([xshift=0.06\paperwidth,yshift=0.08\paperheight]
     current page.west){%
@@ -115,4 +130,108 @@
   \end{beamercolorbox}%
 }
 
+
+\setbeamertemplate{headline}{
+  \begin{beamercolorbox}[wd=\paperwidth,ht=2ex,dp=3ex,center]{headlinecolors}
+    \vfill
+    \usebeamerfont{headline}
+    \insertnavigation{0.9\paperwidth}
+  \end{beamercolorbox}
+}
+
+
+% Icon als Folienposition -> Buggy
+% Aktuelle Folie – voll sichtbar
+% \setbeamertemplate{mini frame}{%
+%   \includegraphics[width=0.015\paperwidth]{logo.png}%
+% }
+
+% Andere Sektionen – halbtransparent
+% \setbeamertemplate{mini frame in other section}{%
+%   \begin{pgfpicture}{0pt}{0pt}{0.015\paperwidth}{0.015\paperwidth}
+%     \pgfsetfillopacity{0.3}
+%     \pgftext{\includegraphics[width=0.015\paperwidth]{logo.png}}
+%   \end{pgfpicture}%
+% }
+
+
 % \setbeamertemplate{blocks}[rounded][shadow=false, ]
+
+% ==========================================
+% 1. NORMALER BLOCK (block)
+% ==========================================
+% \setbeamercolor{block title}{fg=background, bg=primary}
+% \setbeamercolor{block body}{fg=background, bg=primary}
+
+% ==========================================
+% 2. ALERT BLOCK (alertblock)
+% ==========================================
+% (Hier nutzen wir der Einfachheit halber Standardfarben mit Abstufungen)
+% \setbeamercolor{block title alerted}{fg=red, bg=primary}
+% \setbeamercolor{block body alerted}{fg=background, bg=primary}
+
+% ==========================================
+% 3. EXAMPLE BLOCK (exampleblock)
+% ==========================================
+% \setbeamercolor{block title example}{fg=green, bg=primary}
+% \setbeamercolor{block body example}{fg=background, bg=primary}
+
+% Überschreibung Normaler Block
+\renewenvironment{block}[1]{
+  \begin{tcolorbox}[
+    enhanced, % erweiterte Features wie Transparenz : on
+    coltitle=background!95!white, % Titel Textfarbe
+    colbacktitle=primary,
+    coltext=black,
+    colback=primary,
+    colframe=primary,
+    title=\textbf{#1},
+    opacityfill=1,
+    opacitytext=1.0,
+    arc=1mm,
+    boxrule=0.5mm
+  ]}{
+\end{tcolorbox}}
+
+%Überschreibung Alert block
+\renewenvironment{alertblock}[1]{
+  \begin{tcolorbox}[
+    enhanced, % erweiterte Features wie Transparenz : on
+    coltitle=background, % Titel Textfarbe
+    colbacktitle=red!80!black,
+    coltext=white,
+    colback=red!80!black,
+    colframe=red!80!black,
+    title=\textbf{#1},
+    opacityfill=1,
+    opacitytext=1.0,
+    arc=1mm,
+    boxrule=0.5mm
+  ]}{
+\end{tcolorbox}}
+
+
+\renewenvironment{exampleblock}[1]{
+  \begin{tcolorbox}[
+    enhanced, % erweiterte Features wie Transparenz : on
+    coltitle=background, % Titel Textfarbe
+    colbacktitle=green!60!black,
+    coltext=white,
+    colback=green!60!black,
+    colframe=green!60!black,
+    title=\textbf{#1},
+    opacityfill=1,
+    opacitytext=1.0,
+    arc=1mm,
+    boxrule=0.5mm
+   ]}{
+  \end{tcolorbox}}
+% Alertblock unterstrichen
+\renewcommand{\alert}[1]{{%
+    \usebeamercolor[fg]{alerted text}%
+    \usebeamerfont{alerted text}%
+    \uline{#1}%
+}}
+
+
+  \endinput
